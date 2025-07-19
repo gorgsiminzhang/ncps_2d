@@ -1,0 +1,19 @@
+services:
+  app:
+    image: nvcr.io/nvidia/tensorflow:24.02-tf2-py3
+    ports:
+      - "1234:6006"
+    runtime: nvidia
+    command: sleep infinity  # ✅ 保持容器运行
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    ipc: host
+    ulimits:
+      memlock: -1
+      stack: 67108864

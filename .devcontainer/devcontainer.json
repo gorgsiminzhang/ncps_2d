@@ -1,0 +1,26 @@
+{
+    "name": "TensorFlow GPU Dev",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder": "/workspace",
+
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+        "python.defaultInterpreterPath": "/usr/bin/python"
+    },
+    "extensions": [
+        "ms-python.python"
+        "ms-toolsai.jupyter"
+    ],
+    "runArgs": ["--gpus", "all"],
+    "remoteEnv": {
+        "PYTHONUNBUFFERED": "1"
+    }
+    "build": {
+     "dockerfile": "Dockerfile"
+     },
+
+    "postCreateCommand": "pip install ipykernel"  
+    "remoteUser": "root"  
+}
